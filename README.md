@@ -12,3 +12,4 @@ Features:
   7.  Total Price
 
 By Cxncer. Thanks to Chatgpt :)
+v.3.0
