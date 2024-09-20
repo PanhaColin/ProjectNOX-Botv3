@@ -16,16 +16,7 @@ CLIENT_NAME, CONTACT, SESSION_TYPE, DATE, TIME, PEOPLE, BOOKED_BY, TOTAL_PRICE =
 
 # Start command
 async def start(update: Update, context: CallbackContext) -> int:
-    # Retrieve the topic ID (chat_id) when the /start command is triggered
-    topic_id = update.message.chat.id
-    context.user_data['topic_id'] = topic_id  # Store topic ID
-
     await update.message.reply_text("Tos Book! What is the client name?")
-    
-    # Send the topic ID to Make.com webhook
-    make_url = 'https://hook.us2.make.com/a8x90abvt3nijoi7gydmplwwt273ex8h'
-    requests.post(make_url, json={"topic_id": topic_id})
-
     return CLIENT_NAME
 
 # Handlers for each step
@@ -110,7 +101,6 @@ async def button_callback(update: Update, context: CallbackContext) -> None:
     if query.data == "send_receipt":
         # Collect the summary data
         summary_data = {
-            "topic_id": context.user_data['topic_id'],  # Include topic ID
             "client_name": context.user_data['client_name'],
             "contact": context.user_data['contact'],
             "session_type": context.user_data['session_type'],
